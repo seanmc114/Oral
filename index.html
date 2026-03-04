@@ -1,52 +1,93 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Turbo Oral Coach</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" href="./style.css">
-
+  <meta charset="utf-8" />
+  <title>Spanish Oral Gym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <main class="wrap">
+  <h1>Spanish Oral Gym</h1>
 
-<h1>Turbo Oral Coach</h1>
+  <p class="sub">
+    Private practice. Make mistakes in peace. Tap a tile to start speaking.
+  </p>
 
-<div class="taskBox">
-<strong>Pregunta:</strong>
-<span id="task"></span>
-<button id="readTask" class="smallBtn">🔊</button>
-</div>
+  <div id="grid" class="grid"></div>
 
-<textarea id="answer" placeholder="Speak or write your answer..."></textarea>
-
-<div class="controls">
-
-<button id="dictateBtn" class="smallBtn">🎙 Speak</button>
-
-<select id="lang">
-<option value="es">Spanish</option>
-<option value="fr">French</option>
-<option value="de">German</option>
-<option value="ga">Irish</option>
-</select>
-
-<button id="runBtn">Submit</button>
-
-</div>
-
-<section id="out" class="card hidden"></section>
-
+  <div class="dash card">
+    <div><strong>Total Stars:</strong> <span id="totalStars">0</span> ⭐</div>
+    <button id="reset" class="ghost">Reset Progress</button>
+  </div>
 </main>
 
 <footer>
-© 2026 Synge St Games — imagination and perseverance
+  © 2026 Synge St Games — imagination and perseverance
 </footer>
 
-<script src="./ai.js"></script>
-<script src="./script.js"></script>
+<script>
+  const TOPICS = [
+    { id: "daily",   icon:"🏠", title:"Vida diaria",      unlock: 0 },
+    { id: "school",  icon:"🎓", title:"El instituto",     unlock: 0 },
+    { id: "friends", icon:"👫", title:"Amigos y familia", unlock: 0 },
+    { id: "free",    icon:"⚽", title:"Tiempo libre",     unlock: 3 },
+    { id: "plans",   icon:"🗓️", title:"Planes (futuro)",  unlock: 6 },
+    { id: "hols",    icon:"✈️", title:"Vacaciones",       unlock: 9 }
+  ];
+
+  function getTotalStars(){
+    return Number(localStorage.getItem("oral_totalStars") || 0);
+  }
+  function getBestStars(topicId){
+    return Number(localStorage.getItem(`oral_bestStars_${topicId}`) || 0);
+  }
+
+  function render(){
+    const total = getTotalStars();
+    document.getElementById("totalStars").textContent = total;
+
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+
+    TOPICS.forEach(t => {
+      const locked = total < t.unlock;
+      const best = getBestStars(t.id);
+
+      const btn = document.createElement("button");
+      btn.className = "tile" + (locked ? " locked" : "");
+      btn.innerHTML = `
+        <div class="tileTop">
+          <div class="tileIcon">${t.icon}</div>
+          <div class="tileTitle">${t.title}</div>
+        </div>
+        <div class="tileMeta">
+          <span>Best: ${"⭐".repeat(best)}${best===0 ? "—" : ""}</span>
+          <span>${locked ? `🔒 unlock at ${t.unlock}⭐` : "▶ start"}</span>
+        </div>
+      `;
+
+      if (!locked){
+        btn.addEventListener("click", () => {
+          localStorage.setItem("oral_topic", t.id);
+          window.location.href = "play.html";
+        });
+      }
+
+      grid.appendChild(btn);
+    });
+  }
+
+  document.getElementById("reset").addEventListener("click", () => {
+    if (!confirm("Reset stars and best results?")) return;
+    localStorage.removeItem("oral_totalStars");
+    TOPICS.forEach(t => localStorage.removeItem(`oral_bestStars_${t.id}`));
+    render();
+  });
+
+  render();
+</script>
 
 </body>
 </html>
