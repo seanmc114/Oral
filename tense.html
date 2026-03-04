@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Choose Tense</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="wrap">
+
+<h1>Choose Tense</h1>
+
+<div class="grid">
+
+<button onclick="chooseTense('present')">Present</button>
+<button onclick="chooseTense('past')">Past</button>
+<button onclick="chooseTense('future')">Future</button>
+
+</div>
+
+</main>
+
+<script>
+
+function chooseTense(t){
+
+localStorage.setItem("tense",t);
+location.href="play.html";
+
+}
+
+</script>
+
+</body>
+</html>
