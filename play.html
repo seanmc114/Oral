@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Spanish Oral Round</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<main class="wrap">
+
+  <div class="topBar">
+    <button id="backBtn" class="ghost">← Back to Tiles</button>
+    <div class="pill" id="topicPill">Topic</div>
+  </div>
+
+  <h1>Oral Round</h1>
+
+  <div class="taskBox">
+    <strong>Pregunta:</strong>
+    <span id="task"></span>
+    <button id="readTask" class="smallBtn" type="button">🔊</button>
+  </div>
+
+  <textarea id="answer" placeholder="Speak (🎙) or type your answer in Spanish..."></textarea>
+
+  <div class="controls">
+    <button id="dictateBtn" class="smallBtn" type="button">🎙 Speak</button>
+    <button id="runBtn" type="button">Submit</button>
+  </div>
+
+  <section id="out" class="card hidden"></section>
+
+</main>
+
+<footer>
+  © 2026 Synge St Games — imagination and perseverance
+</footer>
+
+<script src="ai.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
