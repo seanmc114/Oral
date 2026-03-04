@@ -1,302 +1,239 @@
-const CONFIG = { ROUNDS: 3 };
+const ROUNDS = 3;
 
-// Topic labels for the pill
-const TOPIC_LABEL = {
-  daily:   "Vida diaria",
-  school:  "El instituto",
-  friends: "Amigos y familia",
-  free:    "Tiempo libre",
-  plans:   "Planes (futuro)",
-  hols:    "Vacaciones"
+const THEMES = {
+
+barrio:{
+present:[
+"¿Cómo es tu barrio?",
+"¿Qué hay en tu barrio?",
+"¿Te gusta tu barrio? ¿Por qué?"
+],
+past:[
+"¿Cómo era tu barrio cuando eras niño?",
+"¿Qué hacías en tu barrio de pequeño?"
+],
+future:[
+"¿Te gustaría vivir en otro lugar en el futuro?"
+]
+},
+
+instituto:{
+present:[
+"¿Cómo es tu instituto?",
+"¿Cuál es tu asignatura favorita? ¿Por qué?",
+"¿Te gusta tu instituto? ¿Por qué?"
+],
+past:[
+"¿Cómo era tu primer año en el instituto?"
+],
+future:[
+"¿Qué cambiarías en tu instituto?"
+]
+},
+
+amigos:{
+present:[
+"Describe a tu mejor amigo.",
+"¿Qué haces con tus amigos?",
+"¿Te gusta salir con tus amigos? ¿Por qué?"
+],
+past:[
+"¿Qué hiciste con tus amigos el fin de semana pasado?"
+],
+future:[
+"¿Qué vas a hacer con tus amigos el próximo fin de semana?"
+]
+},
+
+tiempo:{
+present:[
+"¿Qué haces en tu tiempo libre?",
+"¿Te gusta el deporte? ¿Por qué?"
+],
+past:[
+"¿Qué hiciste el fin de semana pasado?"
+],
+future:[
+"¿Qué vas a hacer el fin de semana que viene?"
+]
+},
+
+vacaciones:{
+present:[
+"¿Te gustan las vacaciones? ¿Por qué?"
+],
+past:[
+"¿Dónde fuiste el verano pasado?",
+"¿Qué hiciste el verano pasado?"
+],
+future:[
+"¿Dónde te gustaría ir el próximo verano?"
+]
+},
+
+futuro:{
+present:[
+"¿Te gusta pensar en el futuro? ¿Por qué?"
+],
+past:[],
+future:[
+"¿Qué vas a hacer después de los exámenes?",
+"¿Qué quieres estudiar?",
+"¿Dónde te gustaría vivir?"
+]
+}
+
 };
 
-// Spanish prompts by topic (short, oral-friendly)
-const PROMPTS = {
-  daily: [
-    "¿Cómo es tu casa?",
-    "Describe a tu familia.",
-    "¿Qué haces por la mañana?",
-    "¿Qué haces por la tarde?"
-  ],
-  school: [
-    "¿Cómo es tu instituto?",
-    "¿Cuál es tu asignatura favorita? ¿Por qué?",
-    "¿Qué cambiarías en tu instituto?",
-    "Describe a un profesor."
-  ],
-  friends: [
-    "Describe a tu mejor amigo.",
-    "¿Qué haces con tus amigos?",
-    "¿Cómo te llevas con tu familia?",
-    "Describe a alguien en tu familia."
-  ],
-  free: [
-    "¿Qué haces en tu tiempo libre?",
-    "¿Te gusta el deporte? ¿Por qué?",
-    "¿Qué música te gusta?",
-    "¿Qué haces el fin de semana?"
-  ],
-  plans: [
-    "¿Qué vas a hacer después de los exámenes?",
-    "¿Qué quieres hacer en el futuro?",
-    "¿Te gustaría ir a la universidad? ¿Por qué?",
-    "¿Dónde te gustaría vivir en el futuro?"
-  ],
-  hols: [
-    "Describe tus vacaciones favoritas.",
-    "¿Dónde fuiste el año pasado?",
-    "¿Qué hiciste en verano?",
-    "¿Prefieres vacaciones en Irlanda o en el extranjero? ¿Por qué?"
-  ]
-};
+let theme = localStorage.getItem("theme") || "barrio";
+
+let prompts = [
+...THEMES[theme].present,
+...THEMES[theme].past,
+...THEMES[theme].future
+];
 
 let round = 0;
 let scores = [];
-let focuses = [];
-let startTime = null;
-let currentPrompt = "";
 
-// -------- Robust EU Spanish TTS ----------
-let VOICES_READY = false;
+let taskEl=document.getElementById("task");
+let ans=document.getElementById("answer");
+let out=document.getElementById("out");
 
-function markVoicesReady(){
-  VOICES_READY = true;
-}
-speechSynthesis.onvoiceschanged = markVoicesReady;
+function newPrompt(){
 
-function pickVoice(lang = "es-ES"){
-  const voices = speechSynthesis.getVoices ? speechSynthesis.getVoices() : [];
-  // Prefer exact es-ES, then any es-
-  return (
-    voices.find(v => v.lang && v.lang.toLowerCase() === lang.toLowerCase()) ||
-    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("es")) ||
-    null
-  );
+taskEl.innerText=prompts[Math.floor(Math.random()*prompts.length)];
+
 }
 
-function speakES(text){
-  if (!text) return;
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "es-ES";
-  u.rate = 0.95;
-  const v = pickVoice("es-ES");
-  if (v) u.voice = v;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
+function speak(text){
+
+let u=new SpeechSynthesisUtterance(text);
+
+u.lang="es-ES";
+
+speechSynthesis.speak(u);
+
 }
 
-// -------- Speech recognition (es-ES) ----------
-function startDictation(onText){
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR){
-    alert("Speech recognition not supported on this browser.");
-    return;
-  }
-  const rec = new SR();
-  rec.lang = "es-ES";
-  rec.interimResults = false;
-  rec.maxAlternatives = 1;
+document.getElementById("readTask").onclick=()=>{
 
-  rec.onresult = (e) => {
-    const t = e.results?.[0]?.[0]?.transcript || "";
-    onText(t);
-  };
+speak(taskEl.innerText);
 
-  rec.onerror = () => {
-    alert("Dictation failed. Try again.");
-  };
+};
 
-  rec.start();
+document.getElementById("dictateBtn").onclick=()=>{
+
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+
+alert("Speech input works in Chrome or Edge. You can type your answer.");
+return;
+
 }
 
-// -------- Page logic ----------
-document.addEventListener("DOMContentLoaded", () => {
-  // If we're on tile page, do nothing (tile page has inline JS)
-  if (!document.getElementById("runBtn")) return;
+let r=new SpeechRecognition();
 
-  const topic = localStorage.getItem("oral_topic") || "daily";
-  const topicPrompts = PROMPTS[topic] || PROMPTS.daily;
+r.lang="es-ES";
 
-  const backBtn = document.getElementById("backBtn");
-  const topicPill = document.getElementById("topicPill");
-  const taskEl = document.getElementById("task");
-  const ans = document.getElementById("answer");
-  const out = document.getElementById("out");
-  const runBtn = document.getElementById("runBtn");
-  const readTaskBtn = document.getElementById("readTask");
-  const dictateBtn = document.getElementById("dictateBtn");
+r.onresult=e=>{
 
-  topicPill.textContent = TOPIC_LABEL[topic] || "Tema";
+ans.value=e.results[0][0].transcript;
 
-  backBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
+};
 
-  function newPrompt(){
-    currentPrompt = topicPrompts[Math.floor(Math.random() * topicPrompts.length)];
-    taskEl.textContent = currentPrompt;
-  }
+r.start();
 
-  newPrompt();
+};
 
-  readTaskBtn.addEventListener("click", () => {
-    // Ensure voices load on first interaction in some browsers
-    if (!VOICES_READY) speechSynthesis.getVoices();
-    speakES(currentPrompt);
-  });
+function stars(score){
 
-  dictateBtn.addEventListener("click", () => {
-    startDictation((t) => {
-      // Append with a space if needed
-      ans.value = (ans.value.trim() ? ans.value.trim() + " " : "") + t;
-    });
-  });
+if(score>=85) return 3;
+if(score>=70) return 2;
+if(score>=55) return 1;
+return 0;
 
-  function starsFor(score100){
-    if (score100 >= 85) return 3;
-    if (score100 >= 70) return 2;
-    if (score100 >= 55) return 1;
-    return 0;
-  }
+}
 
-  runBtn.addEventListener("click", async () => {
-    if (!startTime) startTime = Date.now();
+document.getElementById("runBtn").onclick=async()=>{
 
-    const answer = ans.value.trim();
-    if (!answer) return;
+let answer=ans.value.trim();
 
-    runBtn.disabled = true;
-    ans.disabled = true;
+if(!answer) return;
 
-    out.classList.remove("hidden");
-    out.innerHTML = "Thinking…";
+out.classList.remove("hidden");
 
-    let result;
-    try{
-      // Use LC mode in your worker
-      result = await window.classifyAnswer({
-        task: currentPrompt,
-        answer,
-        lang: "lc"
-      });
-    } catch (e){
-      result = { score: 0, focus: "Error", feedback: "AI error — try again." };
-    }
+out.innerHTML="Thinking...";
 
-    scores.push(Number(result.score) || 0);
-    focuses.push(result.focus || "");
-    round++;
+let result=await classifyAnswer({
 
-    renderFeedback(result);
-  });
+task:taskEl.innerText,
+answer:answer,
+lang:"lc"
 
-  function renderFeedback(result){
-    const progress = (round / CONFIG.ROUNDS) * 100;
-    const sc = Number(result.score) || 0;
-    const st = starsFor(sc);
-    const starStr = "⭐".repeat(st) + (st === 0 ? "" : "");
-
-    out.innerHTML = `
-      <div><strong>Round ${round}/${CONFIG.ROUNDS}</strong></div>
-
-      <div style="height:10px;background:#ddd;border-radius:20px;margin:10px 0;">
-        <div style="height:10px;background:#003366;width:${progress}%;border-radius:20px;"></div>
-      </div>
-
-      <div style="font-size:2rem;margin:10px 0;font-weight:800;">
-        ${sc}/100 ${starStr}
-      </div>
-
-      <div style="margin-bottom:10px;">
-        <strong>Focus:</strong> ${result.focus || "—"}
-      </div>
-
-      <div style="margin-bottom:14px;">
-        ${result.feedback || "—"}
-      </div>
-
-      <button id="speakFeedback" class="smallBtn" type="button">🔊 Read</button>
-      <button id="tryAgainBtn" type="button">Try Again</button>
-      <button id="nextBtn" type="button">Next</button>
-    `;
-
-    document.getElementById("speakFeedback").addEventListener("click", () => {
-      // Feedback is in English in your system — keep it readable.
-      // If you later switch to Spanish feedback, just call speakES().
-      const u = new SpeechSynthesisUtterance(result.feedback || "");
-      u.lang = "en-IE";
-      u.rate = 0.95;
-      speechSynthesis.cancel();
-      speechSynthesis.speak(u);
-    });
-
-    document.getElementById("tryAgainBtn").addEventListener("click", () => {
-      ans.disabled = false;
-      runBtn.disabled = false;
-      ans.focus();
-      out.classList.add("hidden");
-    });
-
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      if (round < CONFIG.ROUNDS){
-        ans.disabled = false;
-        runBtn.disabled = false;
-        ans.value = "";
-        ans.focus();
-        newPrompt();
-        out.classList.add("hidden");
-      } else {
-        renderSummary();
-      }
-    });
-  }
-
-  function renderSummary(){
-    const avg = Math.round(scores.reduce((a,b)=>a+b,0) / scores.length);
-    const time = Math.floor((Date.now() - startTime) / 1000);
-
-    const sessionStars = starsFor(avg);
-
-    // update total stars + best stars per topic
-    const totalKey = "oral_totalStars";
-    const bestKey = `oral_bestStars_${topic}`;
-
-    const total = Number(localStorage.getItem(totalKey) || 0);
-    const best = Number(localStorage.getItem(bestKey) || 0);
-
-    localStorage.setItem(totalKey, String(total + sessionStars));
-    localStorage.setItem(bestKey, String(Math.max(best, sessionStars)));
-
-    out.innerHTML = `
-      <hr>
-      <h2>Session Complete</h2>
-      <div style="font-size:2rem;margin:10px 0;font-weight:800;">
-        ${avg}/100 ${"⭐".repeat(sessionStars)}
-      </div>
-      <div>Time: ${time}s</div>
-      <div>Scores: ${scores.join(" → ")}</div>
-
-      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button id="playAgain" type="button">Play Again</button>
-        <button id="backHome" class="ghost" type="button">Back to Tiles</button>
-      </div>
-    `;
-
-    document.getElementById("playAgain").addEventListener("click", () => {
-      round = 0;
-      scores = [];
-      focuses = [];
-      startTime = null;
-      ans.disabled = false;
-      runBtn.disabled = false;
-      ans.value = "";
-      ans.focus();
-      newPrompt();
-      out.classList.add("hidden");
-    });
-
-    document.getElementById("backHome").addEventListener("click", () => {
-      window.location.href = "index.html";
-    });
-  }
 });
+
+scores.push(result.score);
+
+round++;
+
+let starCount=stars(result.score);
+
+out.innerHTML=`
+
+Score: ${result.score}/100 ${"⭐".repeat(starCount)}
+
+<p><strong>Focus:</strong> ${result.focus}</p>
+
+<p>${result.feedback}</p>
+
+<button id="nextBtn">Next</button>
+
+`;
+
+document.getElementById("nextBtn").onclick=()=>{
+
+if(round<ROUNDS){
+
+ans.value="";
+newPrompt();
+out.classList.add("hidden");
+
+}else{
+
+summary();
+
+}
+
+};
+
+};
+
+function summary(){
+
+let avg=Math.round(scores.reduce((a,b)=>a+b)/scores.length);
+
+let starEarned=stars(avg);
+
+let total=Number(localStorage.getItem("stars")||0);
+
+localStorage.setItem("stars",total+starEarned);
+
+out.innerHTML=`
+
+<h2>Session Complete</h2>
+
+Average Score: ${avg}
+
+Stars Earned: ${"⭐".repeat(starEarned)}
+
+<p>Exam tip: add one reason using "porque".</p>
+
+<button onclick="location.href='index.html'">Back to Tiles</button>
+
+`;
+
+}
+
+newPrompt();
