@@ -1,36 +1,62 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Choose Tense</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <title>Choose Tense</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
 <main class="wrap">
+  <div class="topBar">
+    <button id="backBtn" class="ghost">← Themes</button>
+    <div class="pill" id="themePill">Theme</div>
+  </div>
 
-<h1>Choose Tense</h1>
+  <h1>Choose Tense</h1>
+  <p class="sub">Pick the tense you want to practise. The examiner will keep the conversation in that tense unless your answer logically forces a shift.</p>
 
-<div class="grid">
+  <div class="grid3">
+    <button class="tileSmall" data-tense="present">Present<br><span class="tiny">hablo / vivo / me gusta</span></button>
+    <button class="tileSmall" data-tense="past">Past<br><span class="tiny">fui / hice / era</span></button>
+    <button class="tileSmall" data-tense="future">Future<br><span class="tiny">voy a / me gustaría</span></button>
+  </div>
 
-<button onclick="chooseTense('present')">Present</button>
-<button onclick="chooseTense('past')">Past</button>
-<button onclick="chooseTense('future')">Future</button>
-
-</div>
-
+  <div class="card">
+    <div class="tiny">
+      Dictation note: on iPhone Safari, browser dictation APIs don’t exist. This game records audio and transcribes via your Worker, so it still works.
+    </div>
+  </div>
 </main>
 
+<footer>© 2026 Synge St Games — imagination and perseverance</footer>
+
 <script>
+  const THEME_LABEL = {
+    barrio:"Mi barrio y mi casa",
+    instituto:"Mi instituto",
+    familia:"Mi familia",
+    amigos:"Mis amigos",
+    tiempo:"Tiempo libre",
+    vacaciones:"Vacaciones y viajes",
+    salud:"Deporte y salud",
+    tecnologia:"Tecnología y redes",
+    comida:"Comida y vida diaria",
+    futuro:"Planes y futuro"
+  };
 
-function chooseTense(t){
+  const theme = localStorage.getItem("oral_theme") || "barrio";
+  document.getElementById("themePill").textContent = THEME_LABEL[theme] || "Theme";
 
-localStorage.setItem("tense",t);
-location.href="play.html";
+  document.getElementById("backBtn").addEventListener("click", ()=>window.location.href="index.html");
 
-}
-
+  document.querySelectorAll("[data-tense]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      localStorage.setItem("oral_tense", btn.dataset.tense);
+      window.location.href = "play.html";
+    });
+  });
 </script>
 
 </body>

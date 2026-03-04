@@ -1,0 +1,232 @@
+{
+  "barrio": {
+    "present": [
+      "¿Cómo es tu barrio?",
+      "¿Qué hay en tu barrio?",
+      "¿Te gusta vivir en tu barrio? ¿Por qué?",
+      "Describe tu casa o tu piso.",
+      "¿Cómo es tu habitación?"
+    ],
+    "past": [
+      "¿Cómo era tu barrio cuando eras pequeño/a?",
+      "¿Dónde vivías antes?",
+      "¿Qué hacías en tu barrio cuando eras niño/a?",
+      "¿Cómo era tu casa cuando eras pequeño/a?",
+      "¿Qué te gustaba hacer en tu calle cuando eras pequeño/a?"
+    ],
+    "future": [
+      "¿Te gustaría vivir en otro lugar en el futuro? ¿Por qué?",
+      "¿Cómo te gustaría que fuera tu casa en el futuro?",
+      "¿Dónde te gustaría vivir dentro de diez años?",
+      "¿Te gustaría vivir en el centro de la ciudad o en las afueras? ¿Por qué?",
+      "¿Qué cambiarías en tu barrio en el futuro?"
+    ]
+  },
+  "instituto": {
+    "present": [
+      "¿Cómo es tu instituto?",
+      "¿Te gusta tu instituto? ¿Por qué?",
+      "¿Cuál es tu asignatura favorita? ¿Por qué?",
+      "¿Qué haces en el recreo normalmente?",
+      "¿Qué opinas de los deberes?"
+    ],
+    "past": [
+      "¿Cómo fue tu primer año en el instituto?",
+      "¿Qué asignaturas te gustaban el año pasado?",
+      "¿Qué hiciste en tu última excursión con el instituto?",
+      "¿Cómo era tu profesor/a favorito/a el año pasado?",
+      "¿Qué te resultó más difícil el año pasado en el instituto?"
+    ],
+    "future": [
+      "¿Qué cambiarías en tu instituto?",
+      "¿Qué vas a hacer después de los exámenes?",
+      "¿Te gustaría estudiar en la universidad? ¿Por qué?",
+      "¿Qué asignaturas te gustaría estudiar el año que viene?",
+      "¿Qué te gustaría conseguir este año en el instituto?"
+    ]
+  },
+  "familia": {
+    "present": [
+      "Describe a tu familia.",
+      "¿Con quién vives?",
+      "¿Cómo te llevas con tu familia?",
+      "¿Te gusta pasar tiempo con tu familia? ¿Por qué?",
+      "¿Qué haces con tu familia los fines de semana?"
+    ],
+    "past": [
+      "¿Qué hiciste con tu familia el fin de semana pasado?",
+      "¿Qué celebraste con tu familia el año pasado?",
+      "¿Cómo era tu relación con tu familia cuando eras más pequeño/a?",
+      "¿Qué te gustaba hacer con tu familia cuando eras niño/a?",
+      "¿Dónde fuiste con tu familia el verano pasado?"
+    ],
+    "future": [
+      "¿Qué vas a hacer con tu familia el próximo fin de semana?",
+      "¿Te gustaría tener una familia grande en el futuro? ¿Por qué?",
+      "¿Dónde te gustaría ir de vacaciones con tu familia el próximo verano?",
+      "¿Cómo te gustaría celebrar tu cumpleaños el año que viene?",
+      "¿Qué te gustaría hacer con tu familia en el futuro?"
+    ]
+  },
+  "amigos": {
+    "present": [
+      "Describe a tu mejor amigo/a.",
+      "¿Qué haces con tus amigos normalmente?",
+      "¿Dónde quedas con tus amigos?",
+      "¿Te gusta salir con tus amigos? ¿Por qué?",
+      "¿Qué cualidades valoras en un amigo?"
+    ],
+    "past": [
+      "¿Qué hiciste con tus amigos el fin de semana pasado?",
+      "¿Dónde fuiste con tus amigos el sábado pasado?",
+      "¿Cómo conociste a tu mejor amigo/a?",
+      "¿Qué hiciste en tu última fiesta o salida con amigos?",
+      "¿Qué te gustaba hacer con tus amigos cuando eras más joven?"
+    ],
+    "future": [
+      "¿Qué vas a hacer con tus amigos el fin de semana que viene?",
+      "¿Te gustaría viajar con tus amigos en el futuro? ¿Por qué?",
+      "¿Dónde te gustaría ir con tus amigos el próximo verano?",
+      "¿Te gustaría vivir con amigos en el futuro? ¿Por qué?",
+      "¿Qué planes tienes con tus amigos para el futuro?"
+    ]
+  },
+  "tiempo": {
+    "present": [
+      "¿Qué haces en tu tiempo libre?",
+      "¿Qué aficiones tienes?",
+      "¿Te gusta el deporte? ¿Por qué?",
+      "¿Qué haces un sábado normal?",
+      "¿Prefieres quedarte en casa o salir? ¿Por qué?"
+    ],
+    "past": [
+      "¿Qué hiciste el fin de semana pasado?",
+      "¿Qué hiciste ayer por la tarde?",
+      "¿A qué te dedicabas en tu tiempo libre cuando eras más pequeño/a?",
+      "¿Qué deporte practicabas antes?",
+      "¿Qué hiciste en tus últimas vacaciones de Semana Santa?"
+    ],
+    "future": [
+      "¿Qué vas a hacer el fin de semana que viene?",
+      "¿Qué te gustaría aprender a hacer en el futuro?",
+      "¿Te gustaría practicar un deporte nuevo? ¿Por qué?",
+      "¿Qué vas a hacer esta tarde?",
+      "¿Qué planes tienes para el próximo puente?"
+    ]
+  },
+  "vacaciones": {
+    "present": [
+      "¿Te gustan las vacaciones? ¿Por qué?",
+      "¿Cómo son tus vacaciones ideales?",
+      "¿Prefieres la playa o la montaña? ¿Por qué?",
+      "¿Qué haces normalmente en verano?",
+      "¿Te gusta viajar? ¿Por qué?"
+    ],
+    "past": [
+      "¿Dónde fuiste el verano pasado?",
+      "¿Qué hiciste el verano pasado?",
+      "¿Con quién fuiste de vacaciones el año pasado?",
+      "¿Qué te gustó más de tus últimas vacaciones?",
+      "¿Cómo fue tu último viaje?"
+    ],
+    "future": [
+      "¿Dónde te gustaría ir el próximo verano?",
+      "¿Qué vas a hacer en las próximas vacaciones?",
+      "¿Te gustaría visitar España? ¿Por qué?",
+      "¿Qué harías si tuvieras mucho dinero para viajar?",
+      "¿A qué país te gustaría viajar en el futuro? ¿Por qué?"
+    ]
+  },
+  "salud": {
+    "present": [
+      "¿Practicas deporte? ¿Con qué frecuencia?",
+      "¿Qué haces para estar en forma?",
+      "¿Te gusta comer sano? ¿Por qué?",
+      "¿Qué opinas de la comida rápida?",
+      "¿Cuántas horas duermes normalmente?"
+    ],
+    "past": [
+      "¿Qué deporte practicabas cuando eras más joven?",
+      "¿Qué comiste ayer?",
+      "¿Alguna vez tuviste una lesión? ¿Qué pasó?",
+      "¿Cómo era tu rutina antes?",
+      "¿Qué hiciste la última vez que estuviste enfermo/a?"
+    ],
+    "future": [
+      "¿Qué vas a hacer para cuidar tu salud este año?",
+      "¿Te gustaría ir más al gimnasio en el futuro? ¿Por qué?",
+      "¿Qué hábitos saludables te gustaría tener?",
+      "¿Qué vas a cambiar en tu dieta?",
+      "¿Cómo te gustaría estar dentro de cinco años?"
+    ]
+  },
+  "tecnologia": {
+    "present": [
+      "¿Usas mucho el móvil? ¿Por qué?",
+      "¿Qué redes sociales usas?",
+      "¿Te gusta la tecnología? ¿Por qué?",
+      "¿Cuánto tiempo pasas en Internet al día?",
+      "¿Qué ventajas tiene Internet?"
+    ],
+    "past": [
+      "¿Cuándo tuviste tu primer móvil?",
+      "¿Qué hacías antes sin redes sociales?",
+      "¿Qué videojuego te gustaba cuando eras pequeño/a?",
+      "¿Alguna vez perdiste el móvil? ¿Qué pasó?",
+      "¿Cómo era la tecnología en tu infancia?"
+    ],
+    "future": [
+      "¿Crees que la tecnología será mejor en el futuro? ¿Por qué?",
+      "¿Te gustaría tener menos tiempo de pantalla en el futuro? ¿Por qué?",
+      "¿Qué invento tecnológico te gustaría ver en el futuro?",
+      "¿Cómo crees que cambiarán las redes sociales?",
+      "¿Qué vas a hacer para usar el móvil menos?"
+    ]
+  },
+  "comida": {
+    "present": [
+      "¿Cuál es tu comida favorita? ¿Por qué?",
+      "¿Qué sueles desayunar?",
+      "¿Te gusta cocinar? ¿Por qué?",
+      "¿Prefieres comer en casa o fuera? ¿Por qué?",
+      "¿Qué comes normalmente en el instituto?"
+    ],
+    "past": [
+      "¿Qué comiste ayer?",
+      "¿Qué cenaste anoche?",
+      "¿Cuál fue la mejor comida que probaste el año pasado?",
+      "¿Quién cocinaba en tu casa cuando eras pequeño/a?",
+      "¿Qué te gustaba comer cuando eras niño/a?"
+    ],
+    "future": [
+      "¿Qué vas a comer hoy?",
+      "¿Te gustaría aprender a cocinar mejor? ¿Por qué?",
+      "¿Qué plato te gustaría probar en el futuro?",
+      "¿Vas a cambiar tu dieta este año?",
+      "¿Qué te gustaría comer en una ocasión especial?"
+    ]
+  },
+  "futuro": {
+    "present": [
+      "¿Qué es importante para ti en la vida?",
+      "¿Qué te gusta de tu vida ahora?",
+      "¿Qué asignaturas se te dan mejor?",
+      "¿Qué te gusta hacer para relajarte?",
+      "¿Te gusta aprender idiomas? ¿Por qué?"
+    ],
+    "past": [
+      "¿Qué querías ser cuando eras pequeño/a?",
+      "¿Qué decisión importante tomaste el año pasado?",
+      "¿Qué fue lo mejor del año pasado para ti?",
+      "¿Qué aprendiste el año pasado?",
+      "¿Qué te gustaba hacer cuando eras niño/a?"
+    ],
+    "future": [
+      "¿Qué vas a hacer después del instituto?",
+      "¿Qué quieres estudiar o en qué quieres trabajar?",
+      "¿Dónde te gustaría vivir en el futuro? ¿Por qué?",
+      "¿Cómo te imaginas tu vida dentro de diez años?",
+      "¿Qué metas tienes para el próximo año?"
+    ]
+  }
+}

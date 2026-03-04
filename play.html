@@ -1,39 +1,38 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Oral Conversation</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <title>Oral Conversation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
 <main class="wrap">
+  <div class="topBar">
+    <button id="homeBtn" class="ghost">← Themes</button>
+    <div class="pill" id="pill">Theme · Tense</div>
+  </div>
 
-<h1>Oral Conversation</h1>
+  <h1>Oral Conversation</h1>
 
-<div>
+  <div class="taskBox">
+    <strong>Examinador/a:</strong>
+    <span id="question"></span>
+    <button id="readQ" class="smallBtn" type="button">🔊</button>
+  </div>
 
-<strong>Examiner:</strong>
-<span id="question"></span>
+  <textarea id="answer" placeholder="Speak (🎙) or type your answer in Spanish…"></textarea>
 
-<button onclick="speakQuestion()">🔊</button>
+  <div class="controls">
+    <button id="recordBtn" class="smallBtn" type="button">🎙 Dictate</button>
+    <button id="submitBtn" type="button">Submit</button>
+  </div>
 
-</div>
-
-<div class="controls">
-
-<button id="recordBtn">🎙 Speak Answer</button>
-
-</div>
-
-<textarea id="answer"></textarea>
-
-<button onclick="submitAnswer()">Submit</button>
-
-<div id="feedback"></div>
-
+  <section id="out" class="card hidden"></section>
 </main>
+
+<footer>© 2026 Synge St Games — imagination and perseverance</footer>
 
 <script src="ai.js"></script>
 <script src="script.js"></script>
