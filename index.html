@@ -1,92 +1,79 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Spanish Oral Gym</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<title>Spanish Oral Gym</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <main class="wrap">
-  <h1>Spanish Oral Gym</h1>
 
-  <p class="sub">
-    Private practice. Make mistakes in peace. Tap a tile to start speaking.
-  </p>
+<h1>Spanish Oral Gym</h1>
 
-  <div id="grid" class="grid"></div>
+<div id="grid" class="grid"></div>
 
-  <div class="dash card">
-    <div><strong>Total Stars:</strong> <span id="totalStars">0</span> ⭐</div>
-    <button id="reset" class="ghost">Reset Progress</button>
-  </div>
+<div class="card">
+Total Stars: <span id="stars">0</span> ⭐
+</div>
+
 </main>
 
-<footer>
-  © 2026 Synge St Games — imagination and perseverance
-</footer>
-
 <script>
-  const TOPICS = [
-    { id: "daily",   icon:"🏠", title:"Vida diaria",      unlock: 0 },
-    { id: "school",  icon:"🎓", title:"El instituto",     unlock: 0 },
-    { id: "friends", icon:"👫", title:"Amigos y familia", unlock: 0 },
-    { id: "free",    icon:"⚽", title:"Tiempo libre",     unlock: 3 },
-    { id: "plans",   icon:"🗓️", title:"Planes (futuro)",  unlock: 6 },
-    { id: "hols",    icon:"✈️", title:"Vacaciones",       unlock: 9 }
-  ];
 
-  function getTotalStars(){
-    return Number(localStorage.getItem("oral_totalStars") || 0);
-  }
-  function getBestStars(topicId){
-    return Number(localStorage.getItem(`oral_bestStars_${topicId}`) || 0);
-  }
+const THEMES = [
+{ id:"barrio", title:"🏠 Mi barrio", unlock:0 },
+{ id:"instituto", title:"🎓 Mi instituto", unlock:0 },
+{ id:"amigos", title:"👫 Amigos y familia", unlock:0 },
+{ id:"tiempo", title:"⚽ Tiempo libre", unlock:2 },
+{ id:"vacaciones", title:"✈ Vacaciones", unlock:4 },
+{ id:"futuro", title:"🌍 Planes futuros", unlock:6 }
+];
 
-  function render(){
-    const total = getTotalStars();
-    document.getElementById("totalStars").textContent = total;
+function getStars(){
+return Number(localStorage.getItem("stars")||0);
+}
 
-    const grid = document.getElementById("grid");
-    grid.innerHTML = "";
+function render(){
 
-    TOPICS.forEach(t => {
-      const locked = total < t.unlock;
-      const best = getBestStars(t.id);
+const grid=document.getElementById("grid");
+const stars=getStars();
 
-      const btn = document.createElement("button");
-      btn.className = "tile" + (locked ? " locked" : "");
-      btn.innerHTML = `
-        <div class="tileTop">
-          <div class="tileIcon">${t.icon}</div>
-          <div class="tileTitle">${t.title}</div>
-        </div>
-        <div class="tileMeta">
-          <span>Best: ${"⭐".repeat(best)}${best===0 ? "—" : ""}</span>
-          <span>${locked ? `🔒 unlock at ${t.unlock}⭐` : "▶ start"}</span>
-        </div>
-      `;
+document.getElementById("stars").innerText=stars;
 
-      if (!locked){
-        btn.addEventListener("click", () => {
-          localStorage.setItem("oral_topic", t.id);
-          window.location.href = "play.html";
-        });
-      }
+grid.innerHTML="";
 
-      grid.appendChild(btn);
-    });
-  }
+THEMES.forEach(t=>{
 
-  document.getElementById("reset").addEventListener("click", () => {
-    if (!confirm("Reset stars and best results?")) return;
-    localStorage.removeItem("oral_totalStars");
-    TOPICS.forEach(t => localStorage.removeItem(`oral_bestStars_${t.id}`));
-    render();
-  });
+const locked=stars<t.unlock;
 
-  render();
+const btn=document.createElement("button");
+
+btn.className="tile"+(locked?" locked":"");
+
+btn.innerText=t.title+(locked?" 🔒":"");
+
+if(!locked){
+
+btn.onclick=()=>{
+
+localStorage.setItem("theme",t.id);
+window.location="play.html";
+
+};
+
+}
+
+grid.appendChild(btn);
+
+});
+
+}
+
+render();
+
 </script>
 
 </body>
