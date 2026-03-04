@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>Spanish Oral Gym</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,66 +12,27 @@
 
 <h1>Spanish Oral Gym</h1>
 
-<div id="grid" class="grid"></div>
+<div class="grid">
 
-<div class="card">
-Total Stars: <span id="stars">0</span> ⭐
+<button onclick="chooseTheme('barrio')">🏠 Mi barrio</button>
+<button onclick="chooseTheme('instituto')">🎓 Mi instituto</button>
+<button onclick="chooseTheme('amigos')">👫 Amigos y familia</button>
+<button onclick="chooseTheme('tiempo')">⚽ Tiempo libre</button>
+<button onclick="chooseTheme('vacaciones')">✈ Vacaciones</button>
+<button onclick="chooseTheme('futuro')">🌍 Planes futuros</button>
+
 </div>
 
 </main>
 
 <script>
 
-const THEMES = [
-{ id:"barrio", title:"🏠 Mi barrio", unlock:0 },
-{ id:"instituto", title:"🎓 Mi instituto", unlock:0 },
-{ id:"amigos", title:"👫 Amigos y familia", unlock:0 },
-{ id:"tiempo", title:"⚽ Tiempo libre", unlock:2 },
-{ id:"vacaciones", title:"✈ Vacaciones", unlock:4 },
-{ id:"futuro", title:"🌍 Planes futuros", unlock:6 }
-];
+function chooseTheme(t){
 
-function getStars(){
-return Number(localStorage.getItem("stars")||0);
-}
-
-function render(){
-
-const grid=document.getElementById("grid");
-const stars=getStars();
-
-document.getElementById("stars").innerText=stars;
-
-grid.innerHTML="";
-
-THEMES.forEach(t=>{
-
-const locked=stars<t.unlock;
-
-const btn=document.createElement("button");
-
-btn.className="tile"+(locked?" locked":"");
-
-btn.innerText=t.title+(locked?" 🔒":"");
-
-if(!locked){
-
-btn.onclick=()=>{
-
-localStorage.setItem("theme",t.id);
-window.location="play.html";
-
-};
+localStorage.setItem("theme",t);
+location.href="tense.html";
 
 }
-
-grid.appendChild(btn);
-
-});
-
-}
-
-render();
 
 </script>
 
