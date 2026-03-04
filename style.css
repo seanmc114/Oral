@@ -1,9 +1,24 @@
+:root{
+  --navy:#0b2d5c;
+  --blue:#2b6cff;
+  --teal:#00c2b3;
+  --gold:#ffd43b;
+  --panel:rgba(255,255,255,0.92);
+  --ink:#0f172a;
+}
+
 body{
   margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: linear-gradient(#eef2f7,#dbe4ef);
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  background:
+  radial-gradient(1200px 600px at 20% 10%, rgba(43,108,255,.25), transparent 60%),
+  radial-gradient(900px 500px at 85% 20%, rgba(0,194,179,.20), transparent 55%),
+  linear-gradient(#eef2f7,#dbe4ef);
+  color:var(--ink);
   position:relative;
 }
+
+/* crest watermark */
 
 body::before{
   content:"";
@@ -16,65 +31,71 @@ body::before{
   z-index:0;
 }
 
+/* main panel */
+
 .wrap{
   position:relative;
   z-index:1;
-  width:min(820px, 92vw);
+  width:min(820px,92vw);
   margin:36px auto;
   padding:26px;
-  background:rgba(255,255,255,0.92);
+  background:var(--panel);
   border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  backdrop-filter: blur(2px);
+  box-shadow:0 12px 35px rgba(0,0,0,0.12);
+  backdrop-filter:blur(2px);
 }
 
-h1{ text-align:center; margin:10px 0 8px; }
+h1{
+  text-align:center;
+  margin:10px 0 8px;
+}
 
 .sub{
   text-align:center;
-  margin:0 0 18px;
-  color:#223;
-  opacity:0.85;
+  margin-bottom:18px;
+  opacity:.9;
 }
 
 footer{
   text-align:center;
-  padding:18px 10px 28px;
-  font-size:0.85rem;
-  color:#223;
-  opacity:0.85;
+  padding:18px;
+  font-size:.85rem;
+  opacity:.75;
 }
+
+/* top bar */
 
 .topBar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:8px;
+  align-items:center;
+  margin-bottom:10px;
 }
 
 .pill{
-  padding:8px 12px;
+  padding:8px 14px;
   border-radius:999px;
-  background:#e9f0ff;
-  color:#003366;
   font-weight:700;
-  font-size:0.95rem;
+  font-size:.9rem;
+  background:linear-gradient(135deg,rgba(43,108,255,.25),rgba(0,194,179,.25));
+  border:1px solid rgba(43,108,255,.3);
 }
+
+/* question box */
 
 .taskBox{
   display:flex;
   align-items:center;
-  justify-content:space-between;
   gap:10px;
-  margin:14px 0 12px;
+  margin:14px 0;
 }
 
 #question{
   flex:1;
-  margin-left:10px;
   font-weight:700;
 }
+
+/* textarea */
 
 textarea{
   width:100%;
@@ -87,12 +108,16 @@ textarea{
   resize:vertical;
 }
 
+/* controls */
+
 .controls{
   display:flex;
   gap:10px;
-  margin-bottom:15px;
+  margin-bottom:14px;
   flex-wrap:wrap;
 }
+
+/* buttons */
 
 button{
   padding:12px 16px;
@@ -100,15 +125,38 @@ button{
   border:none;
   font-size:1rem;
   cursor:pointer;
-  background:#003366;
   color:white;
+  background:linear-gradient(135deg,var(--navy),#134a97);
+  box-shadow:0 8px 18px rgba(0,0,0,0.2);
+  transition:all .15s ease;
 }
 
-button:hover{ background:#0052a3; }
+button:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(135deg,#134a97,var(--blue));
+}
 
-.smallBtn{ padding:8px 12px; font-size:0.95rem; background:#566; }
-.ghost{ background:#ffffff; color:#003366; border:1px solid #cbd5e1; }
-.ghost:hover{ background:#f2f6ff; }
+button:active{
+  transform:translateY(1px);
+}
+
+/* small buttons */
+
+.smallBtn{
+  background:linear-gradient(135deg,#14532d,var(--teal));
+}
+
+.ghost{
+  background:#ffffff;
+  color:var(--navy);
+  border:1px solid #cbd5e1;
+}
+
+.ghost:hover{
+  background:#f2f6ff;
+}
+
+/* feedback card */
 
 .card{
   padding:18px;
@@ -117,63 +165,125 @@ button:hover{ background:#0052a3; }
   margin-top:15px;
 }
 
-.hidden{ display:none; }
+.hidden{
+  display:none;
+}
+
+/* grid layouts */
 
 .grid{
   display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:repeat(2,1fr);
   gap:14px;
 }
 
-@media (min-width: 760px){
-  .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (min-width:760px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 
 .grid3{
   display:grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-columns:1fr;
   gap:14px;
 }
-@media (min-width: 760px){
-  .grid3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (min-width:760px){
+  .grid3{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
+
+/* theme tiles */
 
 .tile{
   text-align:left;
   padding:16px;
   border-radius:16px;
-  background:#003366;
+  background:linear-gradient(135deg,var(--navy),#0f3b7a);
   color:white;
   min-height:118px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  transition:all .15s ease;
 }
 
-.tile:hover{ background:#0052a3; }
+.tile:hover{
+  background:linear-gradient(135deg,#0f3b7a,var(--blue));
+  transform:translateY(-2px);
+}
 
 .tileTop{
   display:flex;
-  align-items:flex-start;
   gap:12px;
 }
 
-.tileIcon{ font-size:1.6rem; }
-.tileTitle{ font-weight:900; line-height:1.1; }
-.tileMeta{ font-size:0.88rem; opacity:0.95; margin-top:6px; }
-.tileCTA{ margin-top:12px; font-size:0.95rem; opacity:0.95; }
+.tileIcon{
+  font-size:1.7rem;
+}
+
+.tileTitle{
+  font-weight:900;
+}
+
+.tileMeta{
+  font-size:.88rem;
+  opacity:.9;
+  margin-top:6px;
+}
+
+.tileCTA{
+  margin-top:12px;
+  font-size:.9rem;
+}
+
+/* tense tiles */
 
 .tileSmall{
   text-align:center;
   padding:18px;
   border-radius:16px;
-  background:#003366;
+  background:linear-gradient(135deg,var(--navy),#0f3b7a);
   color:white;
   min-height:96px;
   font-weight:900;
-  line-height:1.2;
 }
-.tileSmall:hover{ background:#0052a3; }
 
-.tiny{ font-size:0.9rem; opacity:0.85; }
-.dash{ display:flex; flex-direction:column; gap:8px; }
+.tileSmall:hover{
+  background:linear-gradient(135deg,#0f3b7a,var(--blue));
+}
+
+/* stars animation */
+
+@keyframes starPop{
+  0%{transform:scale(.8);opacity:.6}
+  50%{transform:scale(1.3);opacity:1}
+  100%{transform:scale(1)}
+}
+
+.star{
+  display:inline-block;
+  color:var(--gold);
+  animation:starPop .4s ease;
+}
+
+/* level up glow */
+
+@keyframes glow{
+  0%{box-shadow:0 0 0 rgba(255,212,59,0)}
+  50%{box-shadow:0 0 25px rgba(255,212,59,.7)}
+  100%{box-shadow:0 0 0 rgba(255,212,59,0)}
+}
+
+.levelUp{
+  animation:glow 1s ease;
+}
+
+/* small text */
+
+.tiny{
+  font-size:.9rem;
+  opacity:.85;
+}
